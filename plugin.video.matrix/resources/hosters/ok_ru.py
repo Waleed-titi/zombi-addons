@@ -25,7 +25,7 @@ class cHoster(iHoster):
         sPattern = 'https*:\/\/.*?((?:(?:ok)|(?:odnoklassniki))\.ru)\/.+?\/([0-9]+)'
         oParser = cParser()
         aResult = oParser.parse(sUrl, sPattern)
-        if aResult[0] is True:
+        if aResult[0]:
             return aResult[1][0]
         return ''
 
@@ -49,7 +49,6 @@ class cHoster(iHoster):
 
         page = json.loads(sHtmlContent)
         page = json.loads(page['flashvars']['metadata'])
-        VSlog(page)
         if page:
             sPattern = "'hlsMasterPlaylistUrl': '(.+?)',"
             aResult = oParser.parse(page, sPattern)
